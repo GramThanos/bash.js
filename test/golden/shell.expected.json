@@ -1,0 +1,3011 @@
+[
+ {
+  "cmd": "if [ -f f.txt ]; then echo yes; else echo no; fi",
+  "stdout": "yes\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if [ -f nope ]; then echo yes; else echo no; fi",
+  "stdout": "no\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if false; then echo 1; elif false; then echo 2; elif true; then echo 3; else echo 4; fi",
+  "stdout": "3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if false; then echo x; fi; echo \"status $?\"",
+  "stdout": "status 0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if ! grep -q zz f.txt; then echo absent; fi",
+  "stdout": "absent\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if grep -q a f.txt && [ -d sub ]; then echo both; fi",
+  "stdout": "both\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if true\nthen\n  echo multi\nfi",
+  "stdout": "multi\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in 1 2 3; do echo \"n$i\"; done",
+  "stdout": "n1\nn2\nn3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for f in sub/*; do echo \"file $f\"; done",
+  "stdout": "file sub/x.txt\nfile sub/y.md\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for w in $(cat f.txt); do printf \"%s,\" \"$w\"; done; echo",
+  "stdout": "a,b,c,d,e,f,\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in {1..5}; do echo -n $i; done; echo",
+  "stdout": "12345\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for ((i=0; i<5; i+=2)); do echo $i; done",
+  "stdout": "0\n2\n4\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for ((;;)); do n=$((n+1)); [ $n -gt 3 ] && break; done; echo $n",
+  "stdout": "4\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "i=0; while [ $i -lt 3 ]; do i=$((i+1)); echo $i; done",
+  "stdout": "1\n2\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "i=5; until [ $i -le 2 ]; do echo $i; i=$((i-1)); done",
+  "stdout": "5\n4\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "while read a b; do echo \"[$b|$a]\"; done < f.txt",
+  "stdout": "[b|a]\n[d|c]\n[f|e]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "cat f.txt | while read l; do echo \"> $l\"; done",
+  "stdout": "> a b\n> c d\n> e f\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "while read -r line; do echo \"<$line>\"; done < lines.txt",
+  "stdout": "<one>\n<two>\n<>\n<three four  five>\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "while read line; do echo \"<$line>\"; done < nonl.txt",
+  "stdout": "<x>\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "while IFS=, read k v; do echo \"$k=$v\"; done < csv.txt",
+  "stdout": "k1=v1\nk2=v2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in 1 2 3 4 5; do [ $i = 2 ] && continue; [ $i = 4 ] && break; echo $i; done",
+  "stdout": "1\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in a b; do for j in 1 2 3; do [ $j = 2 ] && continue 2; echo $i$j; done; done",
+  "stdout": "a1\nb1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in a b; do for j in 1 2; do [ $i = b ] && break 2; echo $i$j; done; done; echo end",
+  "stdout": "a1\na2\nend\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "n=0; while :; do n=$((n+1)); if [ $n -eq 4 ]; then break; fi; done; echo $n",
+  "stdout": "4\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for x in; do echo never; done; echo \"done $?\"",
+  "stdout": "done 0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -- p q r; for a; do echo \"[$a]\"; done",
+  "stdout": "[p]\n[q]\n[r]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in 1 2; do echo $i; done > out.txt; cat out.txt",
+  "stdout": "1\n2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "out.txt": "1\n2\n",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for i in 3 1 2; do echo $i; done | sort",
+  "stdout": "1\n2\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "count=0; while read -r _; do count=$((count+1)); done < lines.txt; echo $count",
+  "stdout": "4\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "break; echo after",
+  "stdout": "after\n",
+  "stderr": "bash: break: only meaningful in a `for', `while', or `until' loop\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case foo.txt in *.md) echo md;; *.txt) echo txt;; *) echo other;; esac",
+  "stdout": "txt\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "x=b; case $x in a|b) echo ab;; c) echo c;; esac",
+  "stdout": "ab\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case Hello in [Hh]ello) echo greet;; esac",
+  "stdout": "greet\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case \"a b\" in \"a b\") echo quoted;; esac",
+  "stdout": "quoted\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case x in y) echo y;; esac; echo \"status $?\"",
+  "stdout": "status 0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case 1 in 1) echo one;& 2) echo two;; 3) echo three;; esac",
+  "stdout": "one\ntwo\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case 1 in 1) echo one;;& 1) echo again;; *) echo any;; esac",
+  "stdout": "one\nagain\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case \"*\" in \"*\") echo star;; *) echo other;; esac",
+  "stdout": "star\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "v=abc; case $v in (a*) echo paren;; esac",
+  "stdout": "paren\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "case z in\n  z)\n    echo multi\n    ;;\nesac",
+  "stdout": "multi\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo \"args: $# $1 $2\"; return 3; }; f x \"y z\"; echo $?",
+  "stdout": "args: 2 x y z\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "function g { echo in g; }; g",
+  "stdout": "in g\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "function h() { echo in h; }; h",
+  "stdout": "in h\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "g() { local v=inner; echo $v; }; v=outer; g; echo $v",
+  "stdout": "inner\nouter\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "g() { v=changed; }; v=orig; g; echo $v",
+  "stdout": "changed\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "g() { local v; v=temp; }; v=orig; g; echo $v",
+  "stdout": "orig\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo \"$FOO\"; }; FOO=bar f; echo \"[$FOO]\"",
+  "stdout": "bar\n[]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "fact() { if [ $1 -le 1 ]; then echo 1; else echo $(( $1 * $(fact $(( $1 - 1 ))) )); fi; }; fact 5",
+  "stdout": "120\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo out; echo err >&2; }; f 2>/dev/null",
+  "stdout": "out\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo \"$@\"; echo \"$*\"; echo $#; }; f a \"b c\" d",
+  "stdout": "a b c d\na b c d\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { shift; echo \"$@\"; }; f 1 2 3",
+  "stdout": "2 3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { return; }; false; f; echo $?",
+  "stdout": "1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo \"${1:-default}\"; }; f; f given",
+  "stdout": "default\ngiven\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { local -a arr=(x y); echo ${#arr[@]}; }; f",
+  "stdout": "2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo $FUNCNAME; g; }; g() { echo $FUNCNAME; }; f",
+  "stdout": "f\ng\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "cnt() { echo $#; }; cnt \"$@\"; set -- a b; cnt \"$@\"; cnt $@ \"\"",
+  "stdout": "0\n2\n3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { local x=1; g; }; g() { echo \"x=$x\"; }; f",
+  "stdout": "x=1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "unset -f nope; f() { echo hi; }; unset -f f; f 2>/dev/null; echo $?",
+  "stdout": "127\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "return 1; echo after",
+  "stdout": "after\n",
+  "stderr": "bash: return: can only `return' from a function or sourced script\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "x=1; (x=2; echo in $x); echo out $x",
+  "stdout": "in 2\nout 1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "(cd sub && ls); ls -d sub",
+  "stdout": "x.txt\ny.md\nsub\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "{ echo a; echo b; } > g.txt; cat g.txt",
+  "stdout": "a\nb\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "g.txt": "a\nb\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "{ echo a; echo b >&2; } 2>&1 | wc -l",
+  "stdout": "2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "true && echo and || echo or",
+  "stdout": "and\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "false && echo and || echo or",
+  "stdout": "or\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "! true; echo $?; ! false; echo $?",
+  "stdout": "1\n0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo a | { read x; echo got $x; }",
+  "stdout": "got a\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "x=$(exit 3); echo $?",
+  "stdout": "3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "(exit 7); echo $?",
+  "stdout": "7\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo \"$(echo nested $(echo deep))\"",
+  "stdout": "nested deep\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "v=out; echo a | v=in; echo $v",
+  "stdout": "out\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "false; echo $?; true; echo $?",
+  "stdout": "1\n0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -- a b c; echo $#; shift; echo \"$@\"; shift 2; echo \"[$*]\" $#",
+  "stdout": "3\nb c\n[] 0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -- \"a b\" c; for x in \"$@\"; do echo \"<$x>\"; done; for x in $@; do echo \"{$x}\"; done",
+  "stdout": "<a b>\n<c>\n{a}\n{b}\n{c}\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -- a b; IFS=,; echo \"$*\"",
+  "stdout": "a,b\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -- 1 2 3 4 5; echo ${@:2:2} ${#@} ${!#}",
+  "stdout": "2 3 5 5\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo ${v:-def} ${v-unset} ${#HOME}",
+  "stdout": "def unset 7\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "v=; echo \"[${v:-d1}] [${v-d2}] [${v:+alt}] [${v+set}]\"",
+  "stdout": "[d1] [] [] [set]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo ${u:=assigned}; echo $u",
+  "stdout": "assigned\nassigned\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "(echo ${missing:?custom message}); echo \"status $?\"",
+  "stdout": "status 1\n",
+  "stderr": "bash: missing: custom message\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "s=abcdef; echo ${s:2:3} ${s: -2} ${s:1} ${s: -4:2}",
+  "stdout": "cde ef bcdef cd\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "p=dir/sub/file.tar.gz; echo ${p#*/} ${p##*/} ${p%.*} ${p%%.*}",
+  "stdout": "sub/file.tar.gz file.tar.gz dir/sub/file.tar dir/sub/file\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "s=hello; echo ${s/l/L} ${s//l/L} ${s/#h/H} ${s/%o/O} ${s^} ${s^^} ${s,,}",
+  "stdout": "heLlo heLLo Hello hellO Hello HELLO hello\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "x=abc; echo ${#x} ${x@Q} ${x@U}",
+  "stdout": "3 'abc' ABC\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "name=HOME; echo ${!name}",
+  "stdout": "/home/u\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=1 b=2; echo $((a + b * 2)) $((10 / 3)) $((10 % 3)) $((2 ** 8))",
+  "stdout": "5 3 1 256\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "i=5; ((i++)); ((i += 10)); echo $i; (( i > 100 )) || echo small",
+  "stdout": "16\nsmall\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "let x=3*4 y=x+1; echo $x $y",
+  "stdout": "12 13\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo $(( 1 > 2 ? 10 : 20 ))",
+  "stdout": "20\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "arr=(one two \"three four\"); echo ${#arr[@]} ${arr[1]}; for x in \"${arr[@]}\"; do echo \"$x\"; done",
+  "stdout": "3 two\none\ntwo\nthree four\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=(x y z); echo ${a[@]:1} ${!a[@]} ${a[-1]}",
+  "stdout": "y z 0 1 2 z\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=(); a+=(x); a+=(y z); echo \"${a[@]}\" ${#a[@]}",
+  "stdout": "x y z 3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a[5]=five; a[1]=one; echo ${!a[@]} \"${a[@]}\"",
+  "stdout": "1 5 one five\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=(1 2 3); unset \"a[1]\"; echo ${#a[@]} ${!a[@]}",
+  "stdout": "2 0 2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=([2]=b [0]=a); echo ${a[@]}",
+  "stdout": "a b\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "declare -A m; m[k]=v; m[z]=w; echo ${m[k]} ${#m[@]}",
+  "stdout": "v 2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "declare -A m=([x]=1 [y]=2); for k in \"${!m[@]}\"; do echo $k; done | sort",
+  "stdout": "x\ny\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=(b c a); IFS=$'\\n' sorted=($(sort <<<\"${a[*]}\")); echo \"${sorted[@]}\"",
+  "stdout": "a b c\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read -a parts <<< \"p q r\"; echo ${parts[2]} ${#parts[@]}",
+  "stdout": "r 3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "a=(x y); echo \"${a[*]}\"; IFS=-; echo \"${a[*]}\"",
+  "stdout": "x y\nx-y\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "arr=(a b c); echo ${arr}; arr=new; echo ${arr[@]}",
+  "stdout": "a\nnew b c\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ abc == a* ]] && echo glob",
+  "stdout": "glob\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ abc == \"a*\" ]] || echo literal",
+  "stdout": "literal\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ abc =~ ^a(b)c$ ]] && echo \"re ${BASH_REMATCH[0]} ${BASH_REMATCH[1]}\"",
+  "stdout": "re abc b\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "re=\"^[0-9]+$\"; [[ 123 =~ $re ]] && echo digits; [[ 12a =~ $re ]] || echo notdigits",
+  "stdout": "digits\nnotdigits\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ -f f.txt && -d sub ]] && echo files",
+  "stdout": "files\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ -z \"\" && -n x ]] && echo strings",
+  "stdout": "strings\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ a < b ]] && echo lt; [[ b > a ]] && echo gt",
+  "stdout": "lt\ngt\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ 10 -gt 9 ]] && echo numeric; [[ 1+1 -eq 2 ]] && echo arith",
+  "stdout": "numeric\narith\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ ! -e nope ]] && echo missing",
+  "stdout": "missing\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ x == y || x == x ]] && echo or",
+  "stdout": "or\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ ( a == a ) && ( b != c ) ]] && echo parens",
+  "stdout": "parens\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "x=\"a b\"; [[ $x == \"a b\" ]] && echo nosplit",
+  "stdout": "nosplit\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "[[ -v HOME ]] && echo set; [[ -v nope ]] || echo unset",
+  "stdout": "set\nunset\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "(( 3 > 2 )) && echo yes; (( 0 )) || echo zero",
+  "stdout": "yes\nzero\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "(( x = 5 * 3 )); echo $x",
+  "stdout": "15\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "n=3; if (( n % 2 )); then echo odd; fi",
+  "stdout": "odd\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read x y <<< \"1 2 3\"; echo \"[$x][$y]\"",
+  "stdout": "[1][2 3]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read -r line <<< \"  spaced  out  \"; echo \"[$line]\"",
+  "stdout": "[spaced  out]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "IFS= read -r line <<< \"  keep  \"; echo \"[$line]\"",
+  "stdout": "[  keep  ]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read <<< \"reply text\"; echo \"$REPLY\"",
+  "stdout": "reply text\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read a b c <<< \"only\"; echo \"[$a][$b][$c]\"",
+  "stdout": "[only][][]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo \"a\\\\b\" | read -r v; echo done",
+  "stdout": "done\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "printf \"a\\\\tb\\n\" | { read v; echo \"$v\"; }",
+  "stdout": "a\tb\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "printf \"a\\\\tb\\n\" | { read -r v; echo \"$v\"; }",
+  "stdout": "a\tb\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read -n 3 v <<< \"abcdef\"; echo $v",
+  "stdout": "abc\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read -d , v <<< \"x,y\"; echo $v",
+  "stdout": "x\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "read v < /dev/null; echo \"status $?\"",
+  "stdout": "status 1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "IFS=: read -r u p rest <<< \"root:x:0:0:root\"; echo \"$u $p $rest\"",
+  "stdout": "root x 0:0:root\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -e; echo a; false; echo b",
+  "stdout": "a\n",
+  "stderr": "",
+  "exitCode": 1,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -e; false || echo ok; if false; then :; fi; ! true; echo survived",
+  "stdout": "ok\nsurvived\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -e; f() { false; echo inside; }; f || echo caught",
+  "stdout": "inside\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -e; (false); echo unreachable",
+  "stdout": "",
+  "stderr": "",
+  "exitCode": 1,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -e; x=$(false); echo after-assign",
+  "stdout": "",
+  "stderr": "",
+  "exitCode": 1,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -u; echo ${nope:-ok}; echo $nope; echo after",
+  "stdout": "ok\n",
+  "stderr": "bash: nope: unbound variable\n",
+  "exitCode": 1,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -o pipefail; false | true; echo $?; set +o pipefail; false | true; echo $?",
+  "stdout": "1\n0\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -x; echo traced; x=1; set +x; echo quiet",
+  "stdout": "traced\nquiet\n",
+  "stderr": "+ echo traced\n+ x=1\n+ set +x\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -f; echo sub/*; set +f; echo sub/*",
+  "stdout": "sub/*\nsub/x.txt sub/y.md\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -C; echo a > c.txt; echo b > c.txt; echo $?; cat c.txt",
+  "stdout": "1\na\n",
+  "stderr": "bash: c.txt: cannot overwrite existing file\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "c.txt": "a\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "shopt -s nullglob; echo none* end",
+  "stdout": "end\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "shopt -s dotglob; echo .* | wc -w",
+  "stdout": "1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "set -- x y; set -- \"$@\" z; echo $#",
+  "stdout": "3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "eval \"x=5; echo \\$x\"",
+  "stdout": "5\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "cmd=\"echo hi\"; eval \"$cmd\"; eval 'for i in 1 2; do echo $i; done'",
+  "stdout": "hi\n1\n2\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "source lib.sh; greet world; echo $LIBVAR",
+  "stdout": "hello world\nloaded\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": ". lib.sh; greet dot",
+  "stdout": "hello dot\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "source args.sh one two",
+  "stdout": "args: 2 one two\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "source ret.sh; echo \"status $?\"",
+  "stdout": "before\nstatus 4\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "type cd ls if nosuch; echo $?",
+  "stdout": "cd is a shell builtin\nls is /usr/bin/ls\nif is a shell keyword\n1\n",
+  "stderr": "bash: type: nosuch: not found\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "type -t echo f.txt; f() { :; }; type -t f",
+  "stdout": "builtin\nfunction\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "command -v ls cd",
+  "stdout": "/usr/bin/ls\ncd\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "f() { echo func; }; command echo plain; f",
+  "stdout": "plain\nfunc\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "readonly r=1; r=2; echo \"r=$r\"",
+  "stdout": "",
+  "stderr": "bash: r: readonly variable\n",
+  "exitCode": 1,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "declare -i n=5; n+=3; echo $n; n=\"2*4\"; echo $n",
+  "stdout": "8\n8\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "declare -p HOME",
+  "stdout": "declare -x HOME=\"/home/u\"\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "unset HOME; echo \"[${HOME-gone}]\"",
+  "stdout": "[gone]\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "export E=1; sh_e=$E; echo $sh_e",
+  "stdout": "1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "getopts \"ab:\" o -b val; echo $o $OPTARG $OPTIND",
+  "stdout": "b val 3\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "while getopts \"ab:c\" opt -a -b B -c rest; do echo \"$opt ${OPTARG:-}\"; done; echo $OPTIND",
+  "stdout": "a \nb B\nc \n5\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "getopts \"a\" o -z; echo \"$o\"",
+  "stdout": "?\n",
+  "stderr": "bash: illegal option -- z\n",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "trap \"echo bye\" EXIT; echo hi",
+  "stdout": "hi\nbye\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "trap 'echo cleanup $?' EXIT; false",
+  "stdout": "cleanup 1\n",
+  "stderr": "",
+  "exitCode": 1,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "printf -v out \"%03d\" 7; echo $out",
+  "stdout": "007\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo $((RANDOM >= 0))",
+  "stdout": "1\n",
+  "stderr": "",
+  "exitCode": 0,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "if true; then echo x",
+  "stdout": "",
+  "stderr": "bash: syntax error: unexpected end of file from `if' command on line 1\n",
+  "exitCode": 2,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "echo a; fi",
+  "stdout": "",
+  "stderr": "bash: syntax error near unexpected token `fi'\nbash: `echo a; fi'\n",
+  "exitCode": 2,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ },
+ {
+  "cmd": "for x in a b; echo $x; done",
+  "stdout": "",
+  "stderr": "bash: syntax error near unexpected token `echo'\nbash: `for x in a b; echo $x; done'\n",
+  "exitCode": 2,
+  "tree": {
+   "args.sh": "echo \"args: $# $1 $2\"\n",
+   "csv.txt": "k1,v1\nk2,v2\n",
+   "f.txt": "a b\nc d\ne f\n",
+   "lib.sh": "greet() { echo \"hello $1\"; }\nLIBVAR=loaded\n",
+   "lines.txt": "one\ntwo\n\nthree four  five\n",
+   "nonl.txt": "x\ny",
+   "ret.sh": "echo before\nreturn 4\necho after\n",
+   "sub": null,
+   "sub/x.txt": "x\n",
+   "sub/y.md": "y\n"
+  }
+ }
+]
