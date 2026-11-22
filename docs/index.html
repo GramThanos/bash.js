@@ -6,7 +6,7 @@
   <title>bash.js: a bash interpreter in plain JavaScript</title>
   <meta name="description" content="A single-file, dependency-free JavaScript library that interprets bash command lines and runs them through host-supplied callbacks. Works in Node, Deno, Bun, browsers and workers.">
   <meta name="theme-color" content="#1b1b1f">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2330a46c'/%3E%3Ctext x='16' y='22' font-family='monospace' font-weight='700' font-size='16' fill='white' text-anchor='middle'%3E%24_%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.min.css">
   <link rel="stylesheet" href="style.css">
   <script>
@@ -105,7 +105,7 @@
       <span class="term-title">user@bash.js: ~/project</span>
       <button class="term-reset" id="term-reset" title="Reset the filesystem and session">Reset</button>
     </div>
-    <div id="terminal"><div class="term-loading">Loading terminal…</div></div>
+    <div class="term-body"><div id="terminal"><div class="term-loading">Loading terminal…</div></div></div>
   </div>
   <div class="chips" id="chips">
     <button class="chip">ls -la</button>

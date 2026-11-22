@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28">
+  <!-- Same as .logo-mark in style.css: linear-gradient(120deg, #30a46c 20%, #3a8fd6), radius 7, bold mono "$_" at 13px.
+       In dark mode the site uses the brighter gradient, so the favicon follows the system scheme too. -->
+  <style>
+    .a { stop-color: #30a46c; } .b { stop-color: #3a8fd6; }
+    @media (prefers-color-scheme: dark) { .a { stop-color: #3dd68c; } .b { stop-color: #5ab8ff; } }
+  </style>
+  <defs>
+    <linearGradient id="g" x1="-0.0915" y1="0.158" x2="1.0915" y2="0.842">
+      <stop offset="0.2" class="a"/>
+      <stop offset="1" class="b"/>
+    </linearGradient>
+  </defs>
+  <rect width="28" height="28" rx="7" fill="url(#g)"/>
+  <text x="14" y="14" dominant-baseline="central" text-anchor="middle" fill="#000"
+        font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Monaco, Consolas, 'Liberation Mono', monospace"
+        font-weight="700" font-size="13">$_</text>
+</svg>

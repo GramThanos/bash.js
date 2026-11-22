@@ -128,8 +128,20 @@
     var fit = new window.FitAddon.FitAddon();
     term.loadAddon(fit);
     term.open(container);
+    // Keep rows/cols matched to the container: refit whenever it changes size
+    // (window resize, layout shifts) and once web fonts have loaded, since the
+    // cell size depends on the font.
+    var fitFrame = 0;
+    function refit() {
+      cancelAnimationFrame(fitFrame);
+      fitFrame = requestAnimationFrame(function () {
+        if (container.clientWidth && container.clientHeight) fit.fit();
+      });
+    }
     fit.fit();
-    window.addEventListener('resize', function () { fit.fit(); });
+    if (window.ResizeObserver) new ResizeObserver(refit).observe(container);
+    else window.addEventListener('resize', refit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
 
     // ----- Custom commands for the playground -----
     BashJS.registerCommand('help', function (ctx) {

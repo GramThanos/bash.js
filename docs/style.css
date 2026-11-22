@@ -80,7 +80,7 @@ html.dark .nav { border-bottom-color: #000; }
 .logo-mark {
   width: 28px; height: 28px; border-radius: 7px;
   display: grid; place-items: center;
-  background: var(--hero-name-bg); color: #fff;
+  background: var(--hero-name-bg); color: black;
   font: 700 13px/1 var(--font-mono);
 }
 .nav-links { margin-left: auto; display: flex; align-items: center; gap: 4px; }
@@ -193,8 +193,9 @@ html.dark .term-window { border-color: #2e2e32; }
 .term-title { flex: 1; text-align: center; color: rgba(235, 235, 245, .6); font: 500 13px/1 var(--font-mono); margin-right: 60px; }
 .term-reset { background: transparent; border: 1px solid #3c3f44; color: rgba(235,235,245,.7); border-radius: 6px; font: 500 12px/1 var(--font); padding: 5px 10px; cursor: pointer; }
 .term-reset:hover { color: #fff; border-color: #5c5f66; }
-#terminal { height: 440px; padding: 12px 4px 12px 14px; }
-#terminal .xterm-viewport { scrollbar-width: thin; scrollbar-color: #3c3f44 transparent; }
+.term-body { padding: 12px 4px 12px 14px; }
+#terminal { height: 416px; overflow: hidden; }
+#terminal .xterm-viewport { overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #3c3f44 transparent; }
 .term-loading { color: rgba(235,235,245,.6); font: 14px var(--font-mono); padding: 8px; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 960px; margin: 20px auto 0; }
 .chip {
@@ -297,5 +298,5 @@ html.dark .tk-f { color: #b392f0; }
   .hero-tagline { font-size: 18px; line-height: 28px; }
   .features { grid-template-columns: 1fr; }
   .section, .playground, .docs { padding-left: 16px; padding-right: 16px; }
-  #terminal { height: 380px; }
+  #terminal { height: 356px; }
 }

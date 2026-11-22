@@ -1,4 +1,17 @@
-# bash.js
+<p align="center">
+  <a href="https://gramthanos.github.io/bash.js/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/banner-dark.svg">
+      <img alt="bash.js: Bash, in plain JavaScript" src="docs/banner-light.svg" width="720">
+    </picture>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://gramthanos.github.io/bash.js/">Website</a> ·
+  <a href="https://gramthanos.github.io/bash.js/#playground">Try it in the browser</a> ·
+  <a href="https://gramthanos.github.io/bash.js/#api">API</a>
+</p>
 
 A single-file, dependency-free JavaScript library that **interprets bash command lines** and executes them entirely through host-supplied callbacks. No real shell, no `child_process`, no Node-only APIs — it runs the same in Node, Deno, Bun, browsers, and workers.
 
