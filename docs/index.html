@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>bash.js: a bash interpreter in plain JavaScript</title>
+  <meta name="description" content="A single-file, dependency-free JavaScript library that interprets bash command lines and runs them through host-supplied callbacks. Works in Node, Deno, Bun, browsers and workers.">
+  <meta name="theme-color" content="#1b1b1f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2330a46c'/%3E%3Ctext x='16' y='22' font-family='monospace' font-weight='700' font-size='16' fill='white' text-anchor='middle'%3E%24_%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var t = localStorage.getItem('bashjs-theme');
+      if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+    })();
+  </script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#"><span class="logo-mark">$_</span> bash.js</a>
+    <nav class="nav-links">
+      <a href="#playground">Playground</a>
+      <a href="#getting-started" class="hide-sm">Guide</a>
+      <a href="#api" class="hide-sm">API</a>
+      <a href="#utilities" class="hide-sm">Utilities</a>
+      <span class="nav-sep"></span>
+      <button class="icon-btn theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg class="sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.5 4.9l1.4-1.4L7 5.6 5.6 7 3.5 4.9zM17 18.4l1.4-1.4 2.1 2.1-1.4 1.4-2.1-2.1zM20.5 3.5l1.4 1.4L19.8 7l-1.4-1.4 2.1-2.1zM5.6 17 7 18.4l-2.1 2.1-1.4-1.4L5.6 17zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2h.1A7 7 0 0 0 10 7zm-6 5a8 8 0 0 0 15.9 1.4A9 9 0 0 1 10.6 4.1 8 8 0 0 0 4 12z"/></svg>
+      </button>
+      <a class="icon-btn" href="https://github.com/GramThanos/bash.js" aria-label="GitHub" title="GitHub" style="padding:0;line-height:normal">
+        <svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1 class="hero-name">bash.js</h1>
+      <p class="hero-text">Bash, in plain JavaScript</p>
+      <p class="hero-tagline">A single-file, dependency-free interpreter for bash command lines. Pipelines, redirections, expansions and 24 GNU-style utilities, with every byte of I/O going through callbacks you supply.</p>
+      <div class="hero-actions">
+        <a class="btn btn-brand" href="#playground">Try it in the browser</a>
+        <a class="btn btn-alt" href="#getting-started">Get Started</a>
+        <a class="btn btn-alt" href="https://github.com/GramThanos/bash.js">View on GitHub</a>
+      </div>
+    </div>
+    <div class="hero-image" aria-hidden="true">
+      <div class="hero-glow"></div>
+      <div class="hero-mark"><div><span>$</span>_<i class="cursor"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container features">
+    <div class="feature">
+      <div class="feature-icon">🧠</div>
+      <h3>A real bash parser</h3>
+      <p>Pipelines, lists, subshells, here-docs, brace, tilde, parameter, command and arithmetic expansion, globbing, <code>if</code>/<code>for</code>/<code>while</code>/<code>case</code> and functions.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🧰</div>
+      <h3>24 utilities included</h3>
+      <p><code>grep</code>, <code>rg</code>, <code>find</code>, <code>sed</code>, <code>awk</code>, <code>sort</code>, <code>diff</code>, <code>patch</code> and more, written in pure JS and following GNU behaviour.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔌</div>
+      <h3>You own the I/O</h3>
+      <p>Four filesystem callbacks and two stream callbacks. Back it with the real disk, IndexedDB, a remote API or the bundled in-memory FS.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌍</div>
+      <h3>Runs anywhere</h3>
+      <p>No <code>child_process</code> and no Node-only APIs. The same file works in Node, Deno, Bun, browsers and web workers.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <h3>Safe on untrusted input</h3>
+      <p>No <code>eval</code>, no <code>Function()</code> and no leaked globals. Loop, output and recursion limits plus <code>AbortSignal</code> support.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📦</div>
+      <h3>One file, zero deps</h3>
+      <p>A UMD-wrapped <code>bash.js</code> that works as a browser global, CommonJS or ESM. Drop it in and go.</p>
+    </div>
+  </div>
+</section>
+
+<section class="playground" id="playground">
+  <div class="section-head">
+    <h2>Try it in your browser</h2>
+    <p>This terminal is bash.js running on an in-memory filesystem (<code>BashJS.memfs()</code>), rendered with xterm.js. Nothing leaves your browser. Type <code>help</code> to get started.</p>
+  </div>
+  <div class="term-window">
+    <div class="term-bar">
+      <i></i><i></i><i></i>
+      <span class="term-title">user@bash.js: ~/project</span>
+      <button class="term-reset" id="term-reset" title="Reset the filesystem and session">Reset</button>
+    </div>
+    <div id="terminal"><div class="term-loading">Loading terminal…</div></div>
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip">ls -la</button>
+    <button class="chip">cat src/app.js | nl</button>
+    <button class="chip">grep -rn TODO src | sort</button>
+    <button class="chip">awk -F, 'NR&gt;1 {s[$2]+=$3} END {for (k in s) print k, s[k]}' data/sales.csv | sort</button>
+    <button class="chip">diff -u &lt;(sort data/a.txt) &lt;(sort data/b.txt)</button>
+    <button class="chip">for i in {1..5}; do echo "$i squared is $((i*i))"; done</button>
+    <button class="chip">sed -E 's/(port)=([0-9]+)/\1=\2\2/' config.ini</button>
+    <button class="chip">find . -name '*.js' -type f</button>
+    <button class="chip">wc -l src/*.js | sort -n</button>
+  </div>
+</section>
+
+<section class="docs">
+  <div class="docs-layout">
+    <aside class="sidebar" id="sidebar">
+      <h5>Guide</h5>
+      <ul>
+        <li><a href="#getting-started">Getting Started</a></li>
+        <li><a href="#quick-start">Quick Start</a></li>
+        <li><a href="#session">Persistent Session</a></li>
+      </ul>
+      <h5>Reference</h5>
+      <ul>
+        <li><a href="#api">API</a></li>
+        <li><a href="#callbacks">Host Callbacks</a></li>
+        <li><a href="#features">Bash Features</a></li>
+        <li><a href="#utilities">Utilities</a></li>
+        <li><a href="#errors">Errors &amp; Exit Codes</a></li>
+        <li><a href="#design">Design Decisions</a></li>
+      </ul>
+    </aside>
+
+    <article class="doc">
+
+<h2 id="getting-started">Getting Started</h2>
+<p>bash.js is one file. Load it whichever way your environment expects.</p>
+<h3>Browser</h3>
+<pre data-lang="html"><code>&lt;script src="bash.js"&gt;&lt;/script&gt;
+&lt;!-- window.BashJS is now available --&gt;</code></pre>
+<h3>Node / CommonJS</h3>
+<pre data-lang="js"><code>const BashJS = require('./bash.js');</code></pre>
+<h3>ESM</h3>
+<pre data-lang="js"><code>import BashJS from './bash.js';</code></pre>
+
+<h2 id="quick-start">Quick Start</h2>
+<p>Supply the host callbacks, then run a command line. This example maps them onto the real disk with Node's <code>fs</code>:</p>
+<pre data-lang="js"><code>const fs = require('fs');
+const path = require('path');
+
+const callbacks = {
+  read: async (p) => {
+    try { return fs.readFileSync(p, 'utf8'); }
+    catch (e) { if (e.code === 'ENOENT') return null; throw e; }
+  },
+  write: async (p, content, opts) => {
+    if (opts?.type === 'dir') { fs.mkdirSync(p, { recursive: true }); return; }
+    fs.mkdirSync(path.dirname(p), { recursive: true });
+    fs.writeFileSync(p, content, { flag: opts?.append ? 'a' : 'w' });
+  },
+  delete: async (p, opts) => fs.rmSync(p, { recursive: !!opts?.recursive, force: true }),
+  move: async (src, dst) => fs.renameSync(src, dst),
+  stdout: (chunk) => process.stdout.write(chunk),
+  stderr: (chunk) => process.stderr.write(chunk),
+};
+
+const result = await BashJS.exec(
+  'grep -rn TODO src | sort | head -5 > todo.txt',
+  '/home/user/project',
+  callbacks,
+  { env: { HOME: '/home/user' } }
+);
+
+result.exitCode; // 0
+result.stdout;   // captured output
+result.cwd;      // final working directory</code></pre>
+<div class="tip">
+  <p class="tip-title">TIP</p>
+  <p>For tests and demos, <code>BashJS.memfs(tree)</code> gives you an in-memory filesystem that already implements the callback contract. The playground above uses it.</p>
+</div>
+
+<h2 id="session">Persistent Session</h2>
+<p>State (cwd, environment, functions, <code>$?</code>, open file descriptors) survives between calls:</p>
+<pre data-lang="js"><code>const sh = BashJS.create({
+  cwd: '/',
+  ...BashJS.memfs(),
+  stdout: (c) => console.log(c),
+  stderr: (c) => console.error(c),
+  env: { PATH: '/usr/bin:/bin' }
+});
+
+await sh.exec('cd /tmp && export X=1');
+await sh.exec('echo $X; pwd');   // "1\n/tmp\n"
+
+sh.getCwd();        // '/tmp'
+sh.getEnv();        // { X: '1', PATH: ..., PWD: '/tmp', ... }
+sh.setEnv('K', 'v');</code></pre>
+
+<h2 id="api">API</h2>
+<h3><code>BashJS.exec(command, cwd, callbacks, options?)</code></h3>
+<p>Runs a single command string. Returns <code>Promise&lt;{ exitCode, stdout, stderr, cwd, env }&gt;</code>.</p>
+<h3><code>BashJS.create(options)</code></h3>
+<p>Creates a persistent session with <code>exec()</code>, <code>getCwd()</code>, <code>getEnv()</code> and <code>setEnv()</code>.</p>
+<pre data-lang="js"><code>const sh = BashJS.create({
+  cwd: '/',                    // initial working directory
+  read, write, delete, move,   // required FS callbacks
+  stdout, stderr,              // required stream callbacks
+  env: {},                     // initial environment
+  now: () => new Date(),       // clock for `date`
+  timezone: 'UTC',             // timezone for `date`
+  maxLoopIterations: 100000,   // safety guard on loops
+  maxOutputBytes: 16 * 1024 * 1024,
+  maxCallDepth: 200,           // function/subshell recursion guard
+  signal: abortSignal,         // AbortSignal to cancel execution
+  strict: false                // throw on unsupported syntax
+});</code></pre>
+<h3><code>BashJS.registerCommand(name, handler)</code></h3>
+<p>Adds a custom utility. The handler receives a command context and returns an exit code.</p>
+<pre data-lang="js"><code>BashJS.registerCommand('hello', async (ctx) => {
+  ctx.stdout.write('hi\n');
+  return 0;
+});</code></pre>
+<h3>Other helpers</h3>
+<ul>
+  <li><code>BashJS.parse(command)</code> returns the AST, for tooling and debugging.</li>
+  <li><code>BashJS.commands()</code> lists every command name: builtins, utilities and custom commands.</li>
+  <li><code>BashJS.memfs(initialTree?)</code> returns an in-memory filesystem adapter.</li>
+  <li><code>BashJS.version</code> is the library version string.</li>
+</ul>
+
+<h2 id="callbacks">Host Callbacks</h2>
+<p>Callbacks may be sync or return a Promise. Paths are always absolute, normalized POSIX paths.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Callback</th><th>Signature</th><th>Semantics</th></tr></thead>
+  <tbody>
+    <tr><td><code>read</code></td><td><code>read(path) → FileNode | null</code></td><td>Return <code>null</code> (or throw <code>ENOENT</code>) when missing.</td></tr>
+    <tr><td><code>write</code></td><td><code>write(path, content, { append?, type? })</code></td><td><code>type: 'dir'</code> creates a directory. <code>append: true</code> appends, otherwise truncates.</td></tr>
+    <tr><td><code>delete</code></td><td><code>delete(path, { recursive? })</code></td><td>Remove a file or directory.</td></tr>
+    <tr><td><code>move</code></td><td><code>move(src, dst)</code></td><td>Rename or move; <code>dst</code> is the final full path.</td></tr>
+    <tr><td><code>stdout</code></td><td><code>stdout(chunk)</code></td><td>Receives top-level fd 1 output in order.</td></tr>
+    <tr><td><code>stderr</code></td><td><code>stderr(chunk)</code></td><td>Receives top-level fd 2 output in order.</td></tr>
+  </tbody>
+</table></div>
+<p>A <code>FileNode</code> can be any of these shapes:</p>
+<pre data-lang="js"><code>'file contents'                          // string: regular file
+['a.txt', 'sub']                         // array of names: directory
+[{ name: 'a.txt', type: 'file' }, ...]   // directory with typed entries
+{ type: 'file', content: '...', size?, mtime?, mode? }
+{ type: 'dir',  entries: [...],  mtime?, mode? }</code></pre>
+<p>Optional <code>stat(path)</code> and <code>exists(path)</code> callbacks are used for speed when supplied.</p>
+
+<h2 id="features">Bash Features</h2>
+<ul>
+  <li><strong>Execution:</strong> pipelines (<code>|</code>, <code>|&amp;</code>), lists (<code>;</code> <code>&amp;</code> <code>&amp;&amp;</code> <code>||</code>), subshells, groups, functions with <code>local</code>/<code>return</code>.</li>
+  <li><strong>Control flow:</strong> <code>if/elif/else</code>, <code>for</code>, <code>while/until</code>, <code>case</code>, <code>(( ))</code>, <code>[[ ]]</code> with <code>=~</code> and file tests.</li>
+  <li><strong>Redirections:</strong> <code>&gt;</code> <code>&gt;&gt;</code> <code>&lt;</code> <code>&lt;&gt;</code> <code>&amp;&gt;</code> <code>n&gt;&amp;m</code> <code>n&gt;&amp;-</code>, here-docs, here-strings, <code>&lt;(cmd)</code> / <code>&gt;(cmd)</code>, <code>/dev/null</code> and <code>/dev/fd/N</code>.</li>
+  <li><strong>Expansions:</strong> brace <code>{a,b}</code> <code>{1..10..2}</code>, tilde, parameter (<code>${v:-d}</code> <code>${v//p/r}</code> <code>${#v}</code> arrays, indirection), command, arithmetic, word splitting, globbing incl. <code>**</code>.</li>
+  <li><strong>Options:</strong> <code>set -e -u -x -o pipefail -o noclobber</code>, <code>shopt</code>.</li>
+  <li><strong>Builtins:</strong> <code>cd echo printf pwd true false : exit return export unset readonly local declare set shopt shift read test [ eval source exec command type which hash basename</code>.</li>
+</ul>
+
+<h2 id="utilities">Utilities</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>Utility</th><th>Key options</th></tr></thead>
+  <tbody>
+    <tr><td><code>grep</code></td><td><code>-E -F -P -i -v -w -x -c -l -L -n -o -q -r -m -A -B -C -e -f</code></td></tr>
+    <tr><td><code>rg</code></td><td>recursive, honours <code>.gitignore</code>; <code>-i -S -v -w -F -n -l -c -o -g -t/-T</code></td></tr>
+    <tr><td><code>find</code></td><td><code>-name -type -size -empty -mtime -maxdepth -print -delete -exec … \;</code></td></tr>
+    <tr><td><code>sed</code></td><td><code>-n -e -f -E -i -s -z</code>, addresses, <code>s/// d p n y b t :</code></td></tr>
+    <tr><td><code>awk</code></td><td><code>-F -v -f</code>, POSIX awk plus gawk extras</td></tr>
+    <tr><td><code>sort</code></td><td><code>-r -n -g -h -V -M -f -u -s -c -o -t -k</code></td></tr>
+    <tr><td><code>uniq</code></td><td><code>-c -d -D -u -i -f -s -w</code></td></tr>
+    <tr><td><code>cut</code></td><td><code>-b -c -f -d -s --complement</code></td></tr>
+    <tr><td><code>diff</code></td><td>Myers O(ND), <code>-u -c -q -r -N -i -w -b --label</code></td></tr>
+    <tr><td><code>patch</code></td><td>unified/context/normal, <code>-pN -R -N --dry-run -o -b</code></td></tr>
+    <tr><td><code>cat</code> <code>head</code> <code>tail</code> <code>wc</code> <code>nl</code></td><td>the usual GNU flags</td></tr>
+    <tr><td><code>ls</code> <code>mkdir</code> <code>rm</code> <code>mv</code> <code>dirname</code></td><td>the usual GNU flags</td></tr>
+    <tr><td><code>date</code></td><td><code>+FORMAT -u -d -I -R --rfc-3339 -r</code></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="errors">Errors &amp; Exit Codes</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>Situation</th><th>Message (stderr)</th><th>Exit</th></tr></thead>
+  <tbody>
+    <tr><td>unknown command</td><td><code>bash: foo: command not found</code></td><td>127</td></tr>
+    <tr><td>syntax error</td><td><code>bash: syntax error near unexpected token 'x'</code></td><td>2</td></tr>
+    <tr><td>missing file</td><td><code>cat: x: No such file or directory</code></td><td>1</td></tr>
+    <tr><td>unsupported feature</td><td><code>bash: &lt;feature&gt;: not supported by bash.js</code></td><td>2</td></tr>
+    <tr><td>abort signal</td><td>stops between commands</td><td>130</td></tr>
+  </tbody>
+</table></div>
+<p><code>exec()</code> never rejects unless <code>strict: true</code>. Internal bugs are reported as <code>bash.js: internal error: …</code> with exit 70.</p>
+
+<h2 id="design">Design Decisions</h2>
+<ul>
+  <li><strong>Async everywhere:</strong> callbacks may hit IndexedDB or a remote FS, so <code>exec</code> returns a Promise.</li>
+  <li><strong>Buffered pipelines:</strong> simple and deterministic; inputs are finite.</li>
+  <li><strong>Text-only data:</strong> UTF-8 strings; byte-oriented flags use <code>TextEncoder</code> offsets.</li>
+  <li><strong>GNU is the reference</strong> for options and messages, with a <code>C</code>/<code>POSIX</code> locale.</li>
+  <li><strong>Background jobs</strong> (<code>&amp;</code>) run synchronously.</li>
+</ul>
+
+    </article>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>Released under the MIT License.</p>
+  <p>Copyright © 2026 Grammatopoulos Athanasios Vasileios</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/lib/xterm.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit@0.10.0/lib/addon-fit.min.js"></script>
+<script src="site.js"></script>
+<script src="playground.js"></script>
+</body>
+</html>
