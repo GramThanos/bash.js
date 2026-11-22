@@ -1,0 +1,26 @@
+{
+  "name": "bash.js",
+  "version": "1.0.0",
+  "description": "A dependency-free JavaScript interpreter for bash command lines, run through host-supplied callbacks.",
+  "main": "bash.js",
+  "files": [
+    "bash.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GramThanos/bash.js.git"
+  },
+  "keywords": [
+    "bash",
+    "shell",
+    "interpreter",
+    "browser"
+  ],
+  "author": "Grammatopoulos Athanasios Vasileios",
+  "license": "MIT"
+}

@@ -1,3 +1,8 @@
+/*!
+ * bash.js 1.0.0 - https://github.com/GramThanos/bash.js
+ * Copyright (c) 2026 Grammatopoulos Athanasios Vasileios
+ * SPDX-License-Identifier: MIT
+ */
 (function (root, factory) {
   'use strict';
   if (typeof module === 'object' && module.exports) module.exports = factory();
