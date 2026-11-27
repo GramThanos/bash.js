@@ -258,6 +258,44 @@ test('output process substitutions run after the owner, and short-circuit lazily
   assert.equal(childRan, false);
 });
 
+test('output process substitutions passed as arguments receive what is written to them', async () => {
+  const fs = BashJS.memfs({ '/a.txt': 'x\ny\n' });
+  let writes = 0;
+  const shell = BashJS.create({ read: fs.read, write(p, d, o) { writes++; return fs.write(p, d, o); }, delete: fs.delete, move: fs.move });
+  // tee and sort -o write by path; the child reads that data and writes to the shell stdout.
+  let r = await shell.exec('tee >(wc -l) > /dev/null < /a.txt');
+  assert.deepEqual([r.exitCode, r.stdout, r.stderr], [0, '2\n', '']);
+  r = await shell.exec('sort -r -o >(cat) /a.txt');
+  assert.deepEqual([r.exitCode, r.stdout], [0, 'y\nx\n']);
+  assert.equal(writes, 0);
+  // Several substitutions on one command each get their own data.
+  r = await shell.exec('echo data | tee >(cat) >(wc -c) > /dev/null');
+  assert.equal(r.stdout, 'data\n5\n');
+  // A substitution nothing writes to still runs, with empty input.
+  r = await shell.exec('echo hi >(cat > /z)');
+  assert.equal(r.stdout, 'hi /dev/fd/10\n');
+  assert.equal(fs.snapshot()['/z'], '');
+  r = await shell.exec('tee >(cat > /z) < /a.txt > /dev/null');
+  assert.equal(fs.snapshot()['/z'], 'x\ny\n');
+});
+
+test('functions can open process substitutions passed to them', async () => {
+  const shell = BashJS.create(callbacks());
+  let r = await shell.exec('f() { echo first; cat "$1"; }; f <(echo from-sub)');
+  assert.deepEqual([r.exitCode, r.stdout, r.stderr], [0, 'first\nfrom-sub\n', '']);
+  r = await shell.exec('g() { echo inner > "$1"; }; g >(cat)');
+  assert.deepEqual([r.exitCode, r.stdout, r.stderr], [0, 'inner\n', '']);
+  // Consumed by a redirection inside the function, it runs only once.
+  r = await shell.exec('h() { echo a > "$1"; echo done; }; h >(cat)');
+  assert.equal(r.stdout, 'a\ndone\n');
+});
+
+test('each output redirection to a process substitution runs its command once', async () => {
+  const shell = BashJS.create(callbacks());
+  const r = await shell.exec('echo x > >(echo O) 2> >(echo E) 3> >(echo T)');
+  assert.equal(r.stdout, 'O\n');
+});
+
 test('output process substitutions avoid VFS and work for utilities and pipeline stages', async () => {
   const fs = BashJS.memfs();
   let reads = 0, writes = 0;

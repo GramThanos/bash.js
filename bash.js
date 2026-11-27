@@ -963,6 +963,9 @@
         // while retaining the same underlying VFS.
         var processFiles = new Map();
         var processOutputs = new Map();
+        // Data written by path (tee, sort -o, ...) to a >(...) passed as an
+        // argument; fed to its command when the command that received it ends.
+        var processInputs = new Map();
         var nextProcessFd = 10;
         var commandArithmeticFailed = false;
         var originalCommand = String(command);
@@ -1809,7 +1812,9 @@
                   if (!alias || !alias.output) badFd();
                   fw = alias.output;
                 } else if (processOutputs.has(wp)) {
-                  let outputBody = processOutputs.get(wp), outputData = '';
+                  // wp is a loop variable: keep this redirection's own path for flush.
+                  let outputPath = wp, outputBody = processOutputs.get(wp), outputData = processInputs.get(wp) || '';
+                  processInputs.delete(wp);
                   // A process-substitution child inherits the shell's current
                   // stdout, not the descriptor being redirected
                   // (`> >(sink1) 2> >(sink2)`: sink2's stdout is sink1).
@@ -1819,7 +1824,7 @@
                     await childSession({ stdin: outputData,
                       stdout: function (s) { if (ownerOutput) ownerOutput.write(s); else stdout(s); } }).exec(outputBody, { pipefail: pipefailOn() });
                     outputData = '';
-                    processOutputs.delete(wp);
+                    processOutputs.delete(outputPath);
                   };
                   opened.push(fw);
                 } else if (/^\/dev\/fd\/\d+$/.test(wp)) {
@@ -2180,11 +2185,30 @@
           var m = ASSIGNMENT.exec(p);
           return assignVar(m[1], p.slice(m[0].length), m[2] ? m[2].slice(1, -1) : null, m[3] === '+');
         }
+        // Process substitutions live as long as the command whose words created
+        // them, so a function or nested command can still open the /dev/fd/N it
+        // was given. A >(...) that no redirection consumed runs when the command
+        // ends, reading whatever was written to its path (or nothing).
         async function runSimple(node, io) {
+          var firstFd = nextProcessFd;
+          // The child inherits the shell's stdout, not the command's redirections.
+          var inherited = io.out || (persistentFds.get(1) && persistentFds.get(1).output) || { write: stdout };
+          try { return await runSimpleCommand(node, io); }
+          finally {
+            var own = function (path) { return Number(path.slice(8)) >= firstFd; };
+            var pending = Array.from(processOutputs.keys()).filter(own);
+            for (var pi = 0; pi < pending.length; pi++) {
+              var body = processOutputs.get(pending[pi]), data = processInputs.get(pending[pi]) || '';
+              processOutputs.delete(pending[pi]);
+              processInputs.delete(pending[pi]);
+              await childSession({ stdin: data, stdout: function (s) { inherited.write(s); } }).exec(body, { pipefail: pipefailOn() });
+            }
+            Array.from(processFiles.keys()).filter(own).forEach(function (path) { processFiles.delete(path); });
+          }
+        }
+        async function runSimpleCommand(node, io) {
           commandArithmeticFailed = false;
           substitutionStatus = 0;
-          processFiles.clear();
-          processOutputs.clear();
           var assignmentWords = [], commandWords = [], assigning = true;
           node.words.forEach(function (w) {
             if (assigning && isAssignmentWord(w)) assignmentWords.push(w);
@@ -2274,6 +2298,22 @@
           commandVfs.readFile = async function (path) {
             var resolved = resolvePath(cwd, path);
             return processFiles.has(resolved) ? processFiles.get(resolved) : vfs.readFile(path);
+          };
+          commandVfs.writeFile = async function (path, data, opts) {
+            var resolved = resolvePath(cwd, path);
+            if (!processOutputs.has(resolved)) return vfs.writeFile(path, data, opts);
+            // A pipe has no truncation: every write is appended.
+            processInputs.set(resolved, (processInputs.get(resolved) || '') + String(data == null ? '' : data));
+          };
+          commandVfs.stat = async function (path) {
+            var resolved = resolvePath(cwd, path);
+            if (processOutputs.has(resolved)) return { type: 'file', size: 0 };
+            if (processFiles.has(resolved)) return { type: 'file', size: byteLength(processFiles.get(resolved)) };
+            return vfs.stat(path);
+          };
+          commandVfs.exists = async function (path) {
+            var resolved = resolvePath(cwd, path);
+            return processOutputs.has(resolved) || processFiles.has(resolved) || vfs.exists(path);
           };
           // Reads a command operand: '-' and /dev/stdin are fd 0, /dev/fd/N is
           // that descriptor or a process substitution, else the VFS.
