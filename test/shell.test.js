@@ -57,3 +57,48 @@ test('exit inside a function ends the script; return only leaves the function', 
   assert.equal(r.stdout, '');
   assert.equal(r.exitCode, 4);
 });
+
+test('exec results report whether the host filesystem was read or written', async () => {
+  const run = async (cmd, extra) => {
+    const fs = BashJS.memfs({ '/a.txt': 'x\ny\n', '/d': [] });
+    const r = await BashJS.exec(cmd, '/', Object.assign({ read: fs.read, write: fs.write, delete: fs.delete, move: fs.move }, extra));
+    return [r.read, r.wrote];
+  };
+  // Nothing touches the filesystem.
+  assert.deepEqual(await run('echo hi; x=1; echo $((x+1))'), [false, false]);
+  assert.deepEqual(await run('echo hi > /dev/null; cat /dev/null'), [false, false]);
+  // Reads, stats and existence checks count as reads.
+  assert.deepEqual(await run('cat /a.txt | grep x'), [true, false]);
+  assert.deepEqual(await run('cd /d'), [true, false]);
+  assert.deepEqual(await run('[ -f /missing ]'), [true, false]);
+  assert.deepEqual(await run('find / -name "*.txt"'), [true, false]);
+  // Any write, mkdir, delete or move counts as a write, including in substitutions.
+  // Redirections write without reading first, so they report only a write.
+  assert.deepEqual(await run('echo hi > /b.txt'), [false, true]);
+  assert.deepEqual(await run('echo hi >> /a.txt'), [false, true]);
+  assert.deepEqual(await run('sed -i s/x/z/ /a.txt'), [true, true]);
+  assert.deepEqual(await run('mkdir /m'), [true, true]);
+  assert.deepEqual(await run('rm /a.txt'), [true, true]);
+  assert.deepEqual(await run('mv /a.txt /c.txt'), [true, true]);
+  assert.deepEqual(await run('echo $(mkdir -p /p/q)'), [true, true]);
+  assert.deepEqual(await run('cat <(echo hi > /e.txt)'), [false, true]);
+  // An attempted write counts even when the host refuses it.
+  assert.deepEqual(await run('echo hi > /b.txt', { write: () => { throw new Error('read-only'); } }), [false, true]);
+  // An optional stat callback counts as a read too.
+  let statted = false;
+  assert.deepEqual(await run('[ -e /zzz ]', { stat: () => { statted = true; return null; } }), [true, false]);
+  assert.equal(statted, true);
+});
+
+test('read/wrote are reset for each exec call of a persistent session', async () => {
+  const fs = BashJS.memfs({ '/a.txt': 'x' });
+  const sh = BashJS.create({ read: fs.read, write: fs.write, delete: fs.delete, move: fs.move });
+  const first = await sh.exec('cat /a.txt > /b.txt');
+  assert.deepEqual([first.read, first.wrote], [true, true]);
+  const second = await sh.exec('echo only output');
+  assert.deepEqual([second.read, second.wrote], [false, false]);
+  // A function defined earlier that writes still counts when called later.
+  await sh.exec('w() { echo y >> /a.txt; }');
+  const third = await sh.exec('w');
+  assert.deepEqual([third.read, third.wrote], [false, true]);
+});

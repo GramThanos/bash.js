@@ -189,10 +189,15 @@
     if (typeof callbacks.delete !== 'function') throw new TypeError('BashJS requires a delete(path, opts) callback');
     if (typeof callbacks.move !== 'function') throw new TypeError('BashJS requires a move(src, dst) callback');
     var cache = new Map();
+    // Whether the host filesystem was consulted (read/stat/exists) or asked to
+    // change (write/delete/move) since the last resetAccess(). Attempts count,
+    // even when the callback throws; /dev/null and /dev/zero never do.
+    var access = { read: false, wrote: false };
 
     async function raw(path) {
       path = normalizePath(path);
       if (path === '/dev/null' || path === '/dev/zero') return { type: 'file', content: path === '/dev/zero' ? '\0' : '' };
+      access.read = true;
       if (cache.has(path)) return cache.get(path);
       var value;
       try { value = await callbacks.read(path); }
@@ -216,10 +221,13 @@
       // Cached reads are only valid within one top-level exec(); the host may
       // change files between calls.
       clearCache: function () { cache.clear(); },
+      resetAccess: function () { access.read = false; access.wrote = false; },
+      access: function () { return { read: access.read, wrote: access.wrote }; },
       stat: async function (path) {
         path = normalizePath(path);
         if (path === '/dev/null' || path === '/dev/zero') return { type: 'file', size: path === '/dev/zero' ? 1 : 0 };
         if (typeof callbacks.stat === 'function') {
+          access.read = true;
           try { var result = await callbacks.stat(path); if (result) return result; }
           catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
         }
@@ -231,6 +239,7 @@
         path = normalizePath(path);
         if (path === '/dev/null' || path === '/dev/zero') return true;
         if (typeof callbacks.exists === 'function') {
+          access.read = true;
           try { return !!(await callbacks.exists(normalizePath(path))); }
           catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
         }
@@ -266,6 +275,7 @@
       writeFile: async function (path, data, opts) {
         path = normalizePath(path); opts = opts || {};
         if (path === '/dev/null' || path === '/dev/zero') return;
+        access.wrote = true;
         try { await callbacks.write(path, String(data == null ? '' : data), { append: !!opts.append }); }
         catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
         invalidate(path);
@@ -279,12 +289,14 @@
             if (await this.exists(current)) {
               if (!(await this.isDir(current))) throw new ShellError(current + ': Not a directory', 'ENOTDIR');
             } else {
+              access.wrote = true;
               try { await callbacks.write(current, null, { type: 'dir' }); }
               catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
               invalidate(current);
             }
           }
         } else {
+          access.wrote = true;
           try { await callbacks.write(path, null, { type: 'dir' }); }
           catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
           invalidate(path);
@@ -292,12 +304,14 @@
       },
       remove: async function (path, opts) {
         path = normalizePath(path);
+        access.wrote = true;
         try { await callbacks.delete(path, opts || {}); }
         catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
         invalidate(path);
       },
       rename: async function (src, dst) {
         src = normalizePath(src); dst = normalizePath(dst);
+        access.wrote = true;
         try { await callbacks.move(src, dst); }
         catch (error) { throw new ShellError(error && error.message || String(error), error && error.code || 'EIO'); }
         invalidate(src); invalidate(dst);
@@ -943,7 +957,7 @@
         options = options || {};
         out = '';
         err = '';
-        if (!sharedVfs) vfs.clearCache();
+        if (!sharedVfs) { vfs.clearCache(); vfs.resetAccess(); }
         // Replace command substitutions with opaque characters before lexing.  A
         // separate session gives substitutions their own shell variables/cwd,
         // while retaining the same underlying VFS.
@@ -2645,7 +2659,8 @@
           shell.traps.delete('EXIT');
           await runTop(async function () { await runText(exitTrap, topIo, null); return finalStatus; });
         }
-         return { exitCode: status, stdout: out, stderr: err, cwd: cwd, env: Object.assign({}, env) };
+        var touched = vfs.access();
+        return { exitCode: status, stdout: out, stderr: err, cwd: cwd, env: Object.assign({}, env), read: touched.read, wrote: touched.wrote };
       },
       getCwd: function () { return cwd; },
       getEnv: function () { return Object.assign({}, env); },

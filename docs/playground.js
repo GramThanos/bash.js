@@ -177,6 +177,13 @@
         stderr: function (s) { write('\x1b[31m' + s + '\x1b[0m'); }
       });
     }
+    // Lights the title-bar badges from result.read / result.wrote.
+    function showAccess(result) {
+      var el = document.getElementById('term-access');
+      if (!el) return;
+      el.classList.toggle('did-read', !!(result && result.read));
+      el.classList.toggle('did-wrote', !!(result && result.wrote));
+    }
     function write(s) {
       s = String(s);
       if (!s) return;
@@ -266,7 +273,7 @@
       if (src.trim()) {
         busy = true;
         lastOut = '\n';
-        try { lastExit = (await sh.exec(src)).exitCode; }
+        try { var result = await sh.exec(src); lastExit = result.exitCode; showAccess(result); }
         catch (e) { write('\x1b[31mbash.js: ' + (e && e.message || e) + '\x1b[0m\n'); }
         busy = false;
         // Like zsh: mark output that did not end in a newline.
@@ -419,7 +426,7 @@
     // ----- Boot / reset -----
     try { history = JSON.parse(localStorage.getItem('bashjs-history')) || []; } catch (_) { history = []; }
     function boot() {
-      newSession(); lastExit = 0;
+      newSession(); lastExit = 0; showAccess(null);
       pending = ''; queue = []; histIndex = history.length;
       term.reset();
       term.write('\x1b[1;32mbash.js ' + BashJS.version + '\x1b[0m interactive playground. ' +

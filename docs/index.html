@@ -103,6 +103,7 @@
     <div class="term-bar">
       <i></i><i></i><i></i>
       <span class="term-title">user@bash.js: ~/project</span>
+      <span class="term-access" id="term-access" title="Filesystem access by the last command (result.read / result.wrote)"><span class="acc acc-read">read</span><span class="acc acc-wrote">wrote</span></span>
       <button class="term-reset" id="term-reset" title="Reset the filesystem and session">Reset</button>
     </div>
     <div class="term-body"><div id="terminal"><div class="term-loading">Loading terminal…</div></div></div>
@@ -133,6 +134,7 @@
       <ul>
         <li><a href="#api">API</a></li>
         <li><a href="#callbacks">Host Callbacks</a></li>
+        <li><a href="#fs-access">Filesystem Access</a></li>
         <li><a href="#features">Bash Features</a></li>
         <li><a href="#utilities">Utilities</a></li>
         <li><a href="#errors">Errors &amp; Exit Codes</a></li>
@@ -182,7 +184,9 @@ const result = await BashJS.exec(
 
 result.exitCode; // 0
 result.stdout;   // captured output
-result.cwd;      // final working directory</code></pre>
+result.cwd;      // final working directory
+result.read;     // true: the filesystem was consulted
+result.wrote;    // true: the filesystem was asked to change</code></pre>
 <div class="tip">
   <p class="tip-title">TIP</p>
   <p>For tests and demos, <code>BashJS.memfs(tree)</code> gives you an in-memory filesystem that already implements the callback contract. The playground above uses it.</p>
@@ -207,7 +211,7 @@ sh.setEnv('K', 'v');</code></pre>
 
 <h2 id="api">API</h2>
 <h3><code>BashJS.exec(command, cwd, callbacks, options?)</code></h3>
-<p>Runs a single command string. Returns <code>Promise&lt;{ exitCode, stdout, stderr, cwd, env }&gt;</code>.</p>
+<p>Runs a single command string. Returns <code>Promise&lt;{ exitCode, stdout, stderr, cwd, env, read, wrote }&gt;</code>. See <a href="#fs-access">Filesystem Access</a> for <code>read</code> and <code>wrote</code>.</p>
 <h3><code>BashJS.create(options)</code></h3>
 <p>Creates a persistent session with <code>exec()</code>, <code>getCwd()</code>, <code>getEnv()</code> and <code>setEnv()</code>.</p>
 <pre data-lang="js"><code>const sh = BashJS.create({
@@ -257,6 +261,26 @@ sh.setEnv('K', 'v');</code></pre>
 { type: 'file', content: '...', size?, mtime?, mode? }
 { type: 'dir',  entries: [...],  mtime?, mode? }</code></pre>
 <p>Optional <code>stat(path)</code> and <code>exists(path)</code> callbacks are used for speed when supplied.</p>
+
+<h2 id="fs-access">Filesystem Access</h2>
+<p>Every <code>exec()</code> result says whether the command line touched the host filesystem, so you can tell a read-only command from one that changed something. The playground shows both flags in its title bar after each command.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Field</th><th><code>true</code> when the run called…</th><th>Typical causes</th></tr></thead>
+  <tbody>
+    <tr><td><code>read</code></td><td><code>read</code>, <code>stat</code> or <code>exists</code></td><td><code>cat</code>, <code>grep</code>, <code>ls</code>, globbing, <code>cd</code>, <code>[ -f … ]</code>, <code>&lt; file</code></td></tr>
+    <tr><td><code>wrote</code></td><td><code>write</code>, <code>delete</code> or <code>move</code></td><td><code>&gt; file</code>, <code>&gt;&gt; file</code>, <code>mkdir</code>, <code>rm</code>, <code>mv</code>, <code>sed -i</code>, <code>sort -o</code>, <code>find -delete</code></td></tr>
+  </tbody>
+</table></div>
+<pre data-lang="js"><code>const r = await sh.exec(userCommand);
+if (r.wrote) console.log('this command modified the filesystem');</code></pre>
+<ul>
+  <li>The whole command line counts, including <code>$(…)</code>, <code>&lt;(…)</code>, functions, <code>eval</code>, <code>source</code>, <code>find -exec</code> and custom commands that use <code>ctx.vfs</code>.</li>
+  <li>Attempts count: a callback that throws still sets the flag. Pair <code>wrote</code> with throwing <code>write</code>/<code>delete</code>/<code>move</code> callbacks to run commands read-only and see whether they tried to write.</li>
+  <li>The flags say a callback ran, not that content changed: <code>sed -i</code> with no matches still rewrites the file.</li>
+  <li>Redirections write without reading first, so <code>echo hi &gt; f</code> reports <code>read: false, wrote: true</code>.</li>
+  <li><code>/dev/null</code>, <code>/dev/zero</code>, stdout and stderr never count.</li>
+  <li>In a persistent session each <code>exec()</code> call reports only its own access.</li>
+</ul>
 
 <h2 id="features">Bash Features</h2>
 <ul>

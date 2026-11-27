@@ -96,6 +96,8 @@ console.log('stdout:', result.stdout);   // captured output
 console.log('stderr:', result.stderr);   // captured errors
 console.log('cwd:', result.cwd);         // final working directory
 console.log('env:', result.env);         // final environment
+console.log('read:', result.read);       // true: the FS was consulted
+console.log('wrote:', result.wrote);     // true: the FS was asked to change
 ```
 
 ---
@@ -139,7 +141,7 @@ Execute a single command string.
 | `callbacks` | `object` | Host callbacks (see below) |
 | `options` | `object` | Optional settings |
 
-**Returns:** `Promise<{ exitCode, stdout, stderr, cwd, env }>`
+**Returns:** `Promise<{ exitCode, stdout, stderr, cwd, env, read, wrote }>` (see [Filesystem Access](#filesystem-access) for `read` and `wrote`)
 
 ### `BashJS.create(options)`
 
@@ -236,6 +238,29 @@ All callbacks may be sync or return a Promise; the library always `await`s them.
 **Optional extra callbacks** (used for speed if supplied, emulated otherwise):
 - `stat(path) → { type, size, mtime, mode } \| null`
 - `exists(path) → boolean`
+
+---
+
+## Filesystem Access
+
+Every `exec()` result says whether the command line touched the host filesystem, so you can tell a read-only command from one that changed something:
+
+| Field | `true` when the run called… | Typical causes |
+|-------|-----------------------------|----------------|
+| `read` | `read`, `stat` or `exists` | `cat`, `grep`, `ls`, globbing, `cd`, `[ -f … ]`, `< file` |
+| `wrote` | `write`, `delete` or `move` | `> file`, `>> file`, `mkdir`, `rm`, `mv`, `sed -i`, `sort -o`, `find -delete` |
+
+```js
+const r = await sh.exec(userCommand);
+if (r.wrote) console.log('this command modified the filesystem');
+```
+
+- The whole command line counts, including `$(…)`, `<(…)`, functions, `eval`, `source`, `find -exec` and custom commands that use `ctx.vfs`.
+- Attempts count: a callback that throws still sets the flag. Pair `wrote` with throwing `write`/`delete`/`move` callbacks to run commands read-only and see whether they tried to write.
+- The flags say a callback ran, not that content changed: `sed -i` with no matches still rewrites the file.
+- Redirections write without reading first, so `echo hi > f` reports `read: false, wrote: true`.
+- `/dev/null`, `/dev/zero`, stdout and stderr never count.
+- In a persistent session each `exec()` call reports only its own access.
 
 ---
 
